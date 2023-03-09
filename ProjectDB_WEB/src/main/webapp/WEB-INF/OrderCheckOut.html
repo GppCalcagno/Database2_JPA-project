@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>OrderCheckOut</title>
+</head>
+<body>
+
+	<h1>Order Completed</h1>
+
+	<p th:text="${'Payment Status: ' + status}"></p>
+
+	<form action="Home">
+		<input type="submit" value="Home Page">
+	</form>
+
+
+
+</body>

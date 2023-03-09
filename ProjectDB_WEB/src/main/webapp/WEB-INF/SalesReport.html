@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>SalesReport</title>
+	</head>
+	
+	<style>
+		table, th, td {
+			border: 1px solid black; 
+		}
+		table.center {
+  			margin-left: auto;
+  			margin-right: auto;
+  		}
+  		td {
+  			text-align: center;
+		}
+	</style>
+	
+	
+	<body>
+	<div th:if="${existEmp}" align="right">
+		<p th:text="${'ID: ' + employee.ID}"></p>
+	</div>
+	<div  align="right">	
+		<a th:href="@{/HomeEmployee}">Go to Home page</a>
+	</div>
+	
+	<h1>SalesReport</h1>
+	
+	<h4>Stats for ServicePack</h4>
+	<div th:if="${Existsr1List}" >
+		<table >
+			<thead>
+				<tr>
+					<th>  ServPack_ID  </th>
+					<th>  NumSales_SP  </th>
+					<th>  Sales_WithOPT  </th>
+					<th>  Sales_WithoutOPT  </th>
+					<th>  AvgSales_OPT  </th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr th:each="sr : ${sr1List}">
+						<td th:text="${sr.ServPack_ID}"></td>
+						<td th:text="${sr.NumSales_SP}"></td>
+						<td th:text="${sr.NumSales_W}"></td>
+						<td th:text="${sr.NumSales_WO}"></td>
+						<td th:text="${sr.AvgSales_OPT}"></td>
+					</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div th:if="${!Existsr1List}">
+		<p th:text="${'    No statistic Available'}"></p>
+	</div>
+	
+	<h4>Stats for ServicePack-ValidityPeriod </h4>
+		<div th:if="${Existsr2List}" >
+			<table >
+			<thead>
+				<tr>
+					<th>  ServPack_ID  </th>
+					<th>  ValidityPeriod_ID  </th>
+					<th>  NumSales  </th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr th:each="sr : ${sr2List}">
+						<td th:text="${sr.ServPack_ID}"></td>
+						<td th:text="${sr.ValPeriod_ID}"></td>
+						<td th:text="${sr.NumSales}"></td>
+					</tr>
+			</tbody>
+		</table>	
+		</div>
+		
+		<div th:if="${!Existsr2List}">
+			<p th:text="${'    No statistic Available'}"></p>
+		</div>
+		
+	<h4>BestSeller: Optional Product </h4>
+		<div th:if="${Existsr3List}" >
+			<table >
+			<thead>
+				<tr>
+					<th>  OptProduct_ID  </th>
+					<th>  NumSales  </th>
+
+				</tr>
+			</thead>
+				<tbody>
+					<tr th:each="sr : ${sr3List}">
+						<td th:text="${sr.OptProd_ID}"></td>
+						<td th:text="${sr.NumSales}"></td>
+					</tr>
+			</tbody>
+		</table>
+		</div>
+		
+		<div th:if="${!Existsr3List}">
+			<p th:text="${'    No statistic Available'}"></p>
+		</div>
+	
+	<h4>List of Insolvent User </h4>
+		<div th:if="${!#lists.isEmpty(insUsList)}" >
+			<table >
+			<thead>
+				<tr>
+					<th>  Username  </th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr th:each="ins : ${insUsList}">
+						<td th:text="${ins.username}"></td>
+					</tr>
+			</tbody>
+		</table>
+		</div>
+	
+	<h4>List of suspended Order </h4>
+		<div th:if="${!#lists.isEmpty(suspOrList)}" >
+			<table >
+			<thead>
+				<tr>
+					<th>  Order ID  </th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr th:each="ord : ${suspOrList}">
+						<td th:text="${ord.ID}"></td>
+					</tr>
+			</tbody>
+		</table>
+		</div>
+	
+	<h4>Alerts </h4>
+		<div th:if="${!#lists.isEmpty(alertsList)}" >
+			<table >
+			<thead>
+				<tr>
+					<th>  Alert ID  </th>
+					<th>  Username  </th>
+					<th>  Email  </th>
+					<th>  Order's Total Value  </th>
+					<th>  Payment's Date  </th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr th:each="al : ${alertsList}">
+						<td th:text="${al.ID}"></td>
+						<td th:text="${al.User_Username}"></td>
+						<td th:text="${al.User_Email}"></td>
+						<td th:text="${al.Order_TotalValue}"></td>
+						<td th:text="${al.Payment_Date}"></td>
+					</tr>
+			</tbody>
+		</table>
+		</div>
+	</body>
+</html>

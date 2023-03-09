@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="height: 515px;">
+<head>
+<meta charset="ISO-8859-1">
+<title>BuyPage</title>
+</head>
+<body>
+	<h1>Buy Service</h1>
+	
+	<p th:text=" ${errorMsg}"></p>
+
+	<div th:if="${existUser}" align="right">
+		<p th:text="${'Username: ' + user.username}"></p>
+	</div>
+	<div th:if="${!existUser}" align="right">
+		<a th:href="@{/GoToLogin}">Login</a>
+	</div>
+
+	<div th:if="${!listEmpty}">
+
+		<form action="#" th:action="@{/BuyPage}" method="POST">
+			<fieldset>
+				<p>
+					<label for="ServicePack">Choose a ServicePack:</label> <select
+						name="servPackID" id="servPackID">
+						<option th:each="p : ${servPackList}" th:value="${p.ID}"
+							th:text="${p.Name}"></option>
+					</select>
+				</p>
+				<input type="submit" value="Select SP">
+			</fieldset>
+		</form>
+	</div>
+
+	<div th:if="${listEmpty}">
+		<h3>No Service Pack Available</h3>
+	</div>
+
+
+	<div th:if="${!isSelectedSP}">
+		<h3>Please Select a Service Package</h3>
+	</div>
+
+	<div th:if="${isSelectedSP}">
+		<p th:text="${'Service Package selected: ' + servicePackID + ' - ' + servicePackName }"></p>
+
+
+		<form th:action="@{/CreateOrder}" method="POST">
+			<fieldset>
+				<p>
+					Activation Day: <input type="date" name="ActivationDate"
+						th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+						placeholder="yyyy-mm-dd" required />
+				</p>
+				<!-- START NON Present OPT -->
+				<div th:if="${!arePresentOPT}">
+					<h4>No Optional Product Available</h4>
+				</div>
+				<!-- END NON Present OPT -->
+				
+				<!-- START Present OPT -->
+				<div th:if="${arePresentOPT}">
+					<h4>Select OPTs (press Ctrl to multiple select):</h4>
+
+					<p>
+						<select name="OPTs" id="OPTs" multiple
+							style="width: 266px; height: 105px">
+							<option th:each="y : ${OPTList}" th:value="${y.ID}"
+								th:text="${y.Name + ' ' + y.MonthlyFee + '   $/month'}"></option>
+						</select>
+					</p>
+				</div>
+				<!-- END Present OPT -->
+				
+				<h4>Select a Validity Period:</h4>
+				<!-- START VALIDITY PERIOD -->
+				<p>
+					<select name="ValidityPer" id="ValidityPer">
+						<option th:each="y : ${VPList}" th:value="${y.ID}"
+							th:text="${'NumMonths: ' + y.NumMonths + ' - Cost: ' + y.MonthlyFee +  '$' }">
+						</option>
+					</select>
+				</p>
+				<!-- END VALIDITY PERIOD -->
+				
+				<input type="submit" value="Go to the Payment">
+			</fieldset>
+		</form>
+	</div>
+</body>
+
+</html>

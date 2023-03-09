@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Home</title>
+	</head>
+	<body> 
+		<div th:if="${existEmp}" align="right">
+			<p th:text="${'ID: ' + employee.ID}"></p>
+		</div>
+	<div th:if="${existEmp}" align="right">
+			<a th:href="@{/Logout}">Logout</a>
+	</div>
+		
+	<div  align="right">	
+	<form action="SalesReport" >
+		<input type="submit" value="SalesReport">
+	</form>
+	</div>
+	
+		<h2>Home Page</h2>
+		<div>
+			<h3>Creation Service Packages</h3>
+			<form action="#" th:action="@{/CreateServicePackage}" method="POST">
+				<fieldset>
+					Name: <input type="text" name="name_pack" required> <br>
+					<p th:text=" ${errorMsg_serv}"></p>
+					<p th:if="${!#lists.isEmpty(fixIntList)}">
+						<label for="FixInternet">Choose a Fixed Internet service:</label> 
+							<select name="fI" id="fI">
+								<option th:value="-1"></option>
+								<option th:each="fixInt : ${fixIntList}" 
+										th:value="${fixInt.ID}" 
+										th:text="${'Number of Giga'+ fixInt.NumGiga + 'Fee for Extra Giga' + fixInt.FeeGiga}">
+								</option>
+							</select>
+					</p>
+					<p th:if="${!#lists.isEmpty(fixPhoList)}">
+						<label for="FixPhone">Choose a Fixed Phone service:</label> 
+							<select name="fP" id="fP">
+								<option th:value="-1"></option>
+								<option th:each="fixPho : ${fixPhoList}" 
+										th:value="${fixPho.ID}" 
+										th:text="${fixPho.ID}">
+								</option>
+							</select>
+					</p>
+					<p th:if="${!#lists.isEmpty(mobPhoList)}">
+						<label for="MobPhone">Choose a Mobile Phone service:</label> 
+							<select name="mP" id="mP">
+								<option th:value="-1"></option>
+								<option th:each="mobPho : ${mobPhoList}" 
+										th:value="${mobPho.ID}" 
+										th:text="${mobPho.NumMinutes + mobPho.NumSMS + mobPho.FeeMinutes + mobPho.FeeSMS}">
+								</option>
+							</select>
+					</p>
+					<p th:if="${!#lists.isEmpty(mobIntList)}">
+						<label for="MobInt">Choose a Mobile Internet service:</label> 
+							<select name="mI" id="mI">
+								<option th:value="-1"></option>
+								<option th:each="mobInt : ${mobIntList}" 
+										th:value="${mobInt.ID}" 
+										th:text="${mobInt.NumGiga + mobInt.FeeGiga}">
+								</option>
+							</select>
+					</p>
+					<p th:text=" ${errorMsg_opt}"></p>
+					<p th:if="${!#lists.isEmpty(optProdList)}">
+						<label for="OptProd">Choose one or more Optional Product(s):</label>
+						<select name="OPTs" id="OPTs" multiple style="width: 266px; height: 105px">
+							<option
+								th:each="y : ${optProdList}" 
+								th:value="${y.ID}"
+								th:text="${y.Name + y.MonthlyFee}">
+							</option>
+						</select>
+					</p>
+					<p th:text=" ${errorMsg_valp}"></p>
+					<p th:if="${!#lists.isEmpty(valPerList)}">
+						<label for="ValPeriod">Choose one or more Validity Period(s):</label>
+						<select name="VPs" id="VPs" multiple style="width: 266px; height: 105px">
+							<option
+								th:each="y : ${valPerList}" 
+								th:value="${y.ID}"
+								th:text="${y.NumMonths + y.MonthlyFee}">
+							</option>
+						</select>
+					</p>
+					<input type="submit" value="Create Service Package">
+				</fieldset>
+			</form>	
+		</div>
+		<div>
+			<h3>Creation Optional Product</h3>
+			<form action="#" th:action="@{/CreateOptionalProduct}" method="POST">
+				<fieldset>
+					Name: <input type="text" name="name_prod" required> <br>
+					Monthly Fee: <input type="number" name="monFee" required> <br>
+					<p th:if="${!#lists.isEmpty(servPackList)}">
+						<label for="ServPack">Choose one or more Service Package(s):</label>
+						<select name="servPacks" id="servPacks" multiple style="width: 266px; height: 105px">
+							<option
+								th:each="y : ${servPackList}" 
+								th:value="${y.ID}"
+								th:text="${y.Name}">
+							</option>
+						</select>
+					</p>
+					<input type="submit" value="Create Optional Product">
+				</fieldset>
+			</form>
+		</div>
+	</body>
+</html>

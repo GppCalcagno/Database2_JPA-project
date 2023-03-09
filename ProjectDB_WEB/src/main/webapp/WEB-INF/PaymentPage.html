@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>PaymentPage</title>
+</head>
+<body>
+	<h1>Payment Service</h1>
+
+
+	<h2>Order Recap</h2>
+	<p th:text="${'Selected Service Pack: ' + order.servPack_ID.name}"></p>
+	<p th:text="${'ValidityPeriod: ' + order.ValPeriod_ID.NumMonths + ' mounths at ' + order.ValPeriod_ID.MonthlyFee + ' $/month'}"></p>
+	
+	<p th:text="${'Activation Date: ' + order.StartOrd}"></p>
+	<!-- Exist OPT -->
+	<div th:if="${esistsOPT}">
+		<p th:text="${'Selected Optional Products: '}"></p>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Cost</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="opt : ${order.optProdList}">
+					<td th:text="${opt.Name + '    '}"></td>
+					<td th:text="${opt.MonthlyFee + '   $/month'}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<!-- NOT Exist OPT -->
+	<div th:if="${!esistsOPT}">
+	<p th:text="${'No selected Optional Product'}"></p>
+	</div>
+	
+	
+	<p th:text="${'Total Price: ' + order.TotalValue}"></p>
+
+
+
+
+
+
+	<div th:if="${isLogged}">
+		<form action="CheckOUT">
+			<!-- WIP -->
+			<input type="submit" value="CONFIRM">
+		</form>
+	</div>
+	<div th:if="${!isLogged}">
+		<form action="GoToLogin">
+			<input type="submit" value="LOGIN">
+		</form>
+	</div>
+
+</body>
+</html>

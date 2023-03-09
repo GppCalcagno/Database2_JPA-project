@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Landing Page</title>
+</head>
+<body>
+
+	<h1>Welcome to the Consumer application</h1>
+	<h2>Login</h2>
+	<p th:text=" ${errorMsg}"></p>
+	<form action="CheckLoginConsumer" method="POST">
+		Username: <input type="text" name="username" required> <br>
+		Password: <input type="password" name="pwd" required><br>
+		<input type="submit" value="login">
+	</form>
+
+	<h2>Registration</h2>
+	<form action="CreateConsumer" method="POST">
+		Username: <input type="text" name="username" required> <br>
+		Email: <input type="text" name="email" required> <br>
+		Password: <input type="password" name="pwd" required><br>
+		<input type="submit" value="Register">
+	</form>
+
+	<form action="Home">
+		<input type="submit" value="Home Page">
+	</form>
+	
+		<h2>Employee Login</h2>
+	<form action="CheckLoginEmployee" method="POST">
+		ID: <input type="text" name="username" required> <br>
+		Password: <input type="password" name="pwd" required><br>
+		<input type="submit" value="login">
+		<p th:text=" ${errorMsg}"></p>
+	</form>
+
+</body>
+
+</html>

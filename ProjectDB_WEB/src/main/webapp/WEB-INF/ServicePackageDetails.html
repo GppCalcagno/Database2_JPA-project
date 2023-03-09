@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Service Package Detail Page</title>
+	</head>
+	<body>
+		<div align="right">
+			<a th:href="@{/Home}">Home</a>
+		</div>
+		<div th:if="${existUser}" align="right">
+			<p th:text="${'Username: ' + user.username}"></p>
+		</div>
+		
+		<h1>Service Package details</h1>
+		<div>
+			<p th:text=" ${'ID ' + servPack.ID}"></p>
+			<p th:text=" ${'Name ' + servPack.Name}"></p>
+		</div>
+		
+		<div th:if="${#lists.isEmpty(valPeriodList) == false}">
+		<h3>Validity Period</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Number of Months</th>
+						<th>Monthly Fee</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="valPer : ${valPeriodList}">
+						<td th:text="${valPer.ID}"></td>
+						<td th:text="${valPer.NumMonths}"></td>
+						<td th:text="${valPer.MonthlyFee}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<h2>Services</h2>
+		<div th:if="${hasMI}">
+			<h3>Mobile Internet</h3>
+			<p th:text="${'ID: ' + mI.ID}"></p>
+			<p th:text="${'Number of Giga: ' + mI.NumGiga}"></p>
+			<p th:text="${'Fee for extra Giga: ' + mI.FeeGiga}"></p>
+		</div>
+		<div th:if="${hasFI}">
+			<h3>Fixed Internet</h3>
+			<p th:text="${'ID: ' + fI.ID}"></p>
+			<p th:text="${'Number of Giga: ' + fI.NumGiga}"></p>
+			<p th:text="${'Fee for extra Giga: ' + fI.FeeGiga}"></p>		
+		</div>
+		<div th:if="${hasMP}">
+			<h3>Mobile Phone</h3>>
+			<p th:text="${'ID: ' + mP.ID}"></p>
+			<p th:text="${'Number of minutes: ' + mP.NumMinutes}"></p>
+			<p th:text="${'Fee for extra minutes: ' + mP.FeeMinutes}"></p>
+			<p th:text="${'Number of SMS: ' + mP.NumSMS}"></p>
+			<p th:text="${'Fee for extra SMS: ' + mP.FeeSMS}"></p>		
+		</div>
+		<div th:if="${hasFP}">
+			<h3>Fixed Phone</h3>
+			<p th:text="${'ID: ' + fP.ID}"></p>	
+		</div>
+		<div th:if="${hasOptProd}">
+		<h3>Optional Product</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Monthly Fee</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="optProd : ${optProdList}">
+						<td th:text="${optProd.ID}"></td>
+						<td th:text="${optProd.Name}"></td>
+						<td th:text="${optProd.MonthlyFee}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

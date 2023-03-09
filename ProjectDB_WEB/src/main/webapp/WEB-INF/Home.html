@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Home</title>
+	</head>
+	<body>
+		<div th:if="${existUser}" align="right">
+			<p th:text="${'Hello: ' + user.username}"></p>
+		</div>
+		
+		<div th:if="${existUser}" align="right">
+			<a th:href="@{/Logout}">Logout</a>
+		</div>
+		<div th:if="${!listEmpty}">
+		<h3>Service Packages</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Details</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sp : ${servPackList}">
+						<td th:text="${sp.ID}"></td>
+						<td th:text="${sp.Name}"></td>
+						<td><a th:href="@{/GetServicePackageDetails(servPackID=${sp.ID})}">Details</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div th:if="${listEmpty}">
+			<h3>There are not Service Packages</h3>
+		</div>
+		
+		<form action="BuyPage">
+			<input type="submit" value="Buy Page">
+		</form>
+		
+		<div th:if="${existUser}">
+			<div th:if="${user.isInsolvent() && !#lists.isEmpty(rejectOrdList)}">
+			<h3>Rejected Orders</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Date</th>
+							<th>Date of start</th>
+							<th>Total Value</th>
+							<th>Service Package</th>
+							<th>Buy again</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ord : ${rejectOrdList}">
+							<td th:text="${ord.ID}"></td>
+							<td th:text="${ord.DataOrd}"></td>
+							<td th:text="${ord.StartOrd}"></td>
+							<td th:text="${ord.TotalValue}"></td>
+							<td th:text="${ord.ServPack_ID.ID}"></td>
+							<td><a th:href="@{/getRejectedOrder(ordID=${ord.ID})}">Buy again</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
