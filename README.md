@@ -15,3 +15,6 @@ In the repository are presents:
 * An [installation guide](https://github.com/GppCalcagno/Database2_JPA-project/blob/main/Software%20Installation%20Guide.pdf) to set up the enviroment to run the project
 
 Note: The database dump is not provided for privacy reason, but a schema of it is present in the report file
+
+---
+✔️ Final Evaluation: 15/16
