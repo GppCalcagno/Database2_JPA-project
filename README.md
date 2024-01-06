@@ -1,10 +1,10 @@
 # :floppy_disk: Database2 JPA-project
 This is the repository for the projects of the Database2 course held at [Politecnico di Milano](https://www.polimi.it/).
 
-The goal of the project is to build a client applications using the same database for a company. The first is a consumer application in which the company's customers can buy the services offered upon registration. The second is an employee application in which the company's workers can log in and create custom Service Packs and new Optional products. They have also access to the sales report page, where all the major selling data are displayed.
+The project aims to develop an application that interfaces with the company's database. The first component is a consumer application, allowing the company's customers to purchase services upon registration. The second component is an employee application, allowing the company's workers to log in, create custom Service Packs, and introduce new optional products. Additionally, employees can access a sales report page, where crucial sales data is displayed.
 
-A relational database supports both applications. Triggers are used to organize some types of information, collected in specific tables for better viewing.
-The entire application is developed in Java, exploiting [JPA framework](https://it.wikipedia.org/wiki/Java_Persistence_API), meanwhile for the database MySQL was used. The frontend is a simple HTML page
+A relational database supports both applications. Triggers are used to organize information, collected in specific tables for better viewing.
+The entire application is developed in Java, exploiting [JPA framework](https://it.wikipedia.org/wiki/Java_Persistence_API), meanwhile for the database MySQL was used. The front end is a simple HTML page
 
 ---
 ### :open_file_folder: Repository Organization
